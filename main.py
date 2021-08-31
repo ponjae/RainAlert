@@ -126,11 +126,6 @@ morby_email = get_message(
 salem_email = get_message(raining_today_salem, raining_hours_salem, "Salem")
 lund_email = get_message(raining_today_lund, raining_hours_lund, "Lund")
 
-print(hometown_email)
-print(morby_email)
-print(salem_email)
-print(lund_email)
-
 
 with smtplib.SMTP("smtp.gmail.com") as connection:
     connection.starttls()
