@@ -162,24 +162,24 @@ def get_humidity_message(humidities: List[float]) -> str:
     return hum_text
 
 
-def get_codes_message(codes: List[int]) -> str:
+def get_codes_message(codes: List[int], temps: List[float]) -> str:
     """
     Get hour for hour information about the upcomming weather
     """
     code_msg = " \n\nTimme for timme prognos nedan: \n"
     for hour, code in enumerate(codes):
         if code < 300:
-            code_msg += f"Kl {hour+7}:00 - Thunderstorm\n"
+            code_msg += f"Kl {hour+7}:00 - Thunderstorm. Temperatur: {temps[hour]} grader.\n"
         elif code < 400:
-            code_msg += f"Kl {hour+7}:00 - Duggregn\n"
+            code_msg += f"Kl {hour+7}:00 - Duggregn. Temperatur: {temps[hour]} grader.\n"
         elif code < 600:
-            code_msg += f"Kl {hour+7}:00 - Regn\n"
+            code_msg += f"Kl {hour+7}:00 - Regn. Temperatur: {temps[hour]} grader.\n"
         elif code < 700:
-            code_msg += f"Kl {hour+7}:00 - Snow\n"
+            code_msg += f"Kl {hour+7}:00 - Snow. Temperatur: {temps[hour]} grader.\n"
         elif code == 800:
-            code_msg += f"Kl {hour+7}:00 - Klar himmel\n"
+            code_msg += f"Kl {hour+7}:00 - Klar himmel. Temperatur: {temps[hour]} grader.\n"
         else:
-            code_msg += f"Kl {hour+7}:00 - Molnigt\n"
+            code_msg += f"Kl {hour+7}:00 - Molnigt. Temperatur: {temps[hour]} grader.\n"
     return code_msg
 
 
@@ -192,7 +192,7 @@ def get_message(raining_list: List[int], condition_codes: List[int], temperature
     email_text += get_temperature_message(temperatures[:-2])
     email_text += get_wind_speed_message(wind_speeds)
     email_text += get_humidity_message(humidities)
-    email_text += get_codes_message(condition_codes)
+    email_text += get_codes_message(condition_codes, temperatures)
     email_text += "\nHa en bra dag!\n/Pontus "
     return email_text
 
